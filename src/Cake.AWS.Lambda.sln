@@ -29,9 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{3A8E8897
 		..\nuspec\Cake.AWS.Lambda.nuspec = ..\nuspec\Cake.AWS.Lambda.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.AWS.Lambda", "Cake.AWS.Lambda\Cake.AWS.Lambda.csproj", "{AE0E3244-E7E1-4739-994B-5D472A8B4D5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.AWS.Lambda", "Cake.AWS.Lambda\Cake.AWS.Lambda.csproj", "{AE0E3244-E7E1-4739-994B-5D472A8B4D5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.AWS.Lambda.Tests", "Cake.AWS.Lambda.Tests\Cake.AWS.Lambda.Tests.csproj", "{09FDCD74-CDFB-4DF3-80CE-47533BC99BE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.AWS.Lambda.Tests", "Cake.AWS.Lambda.Tests\Cake.AWS.Lambda.Tests.csproj", "{09FDCD74-CDFB-4DF3-80CE-47533BC99BE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
