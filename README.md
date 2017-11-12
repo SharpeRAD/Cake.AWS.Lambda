@@ -23,7 +23,10 @@ Cake Build addin for Amazon Lambda
 
 ## Implemented functionality
 
-* Create Deployment
+* Update lambda code
+* Publish lambda version
+* Create lambda alias
+* Update lambda alias
 * Uses AWS fallback credentials (app.config / web.config file, SDK store or credentials file, environment variables, instance profile)
 
 
@@ -55,12 +58,57 @@ Task("Update-Function-Code")
     .Description("Updates the AWS Lambda functions code.")
     .Does(async () =>
 {
-    var settings = Context.CreateUpdateFunctionCodeSettings()
+    var settings = new UpdateFunctionCodeSettings()
+    {
+        RevisionBucket = "company-deployments",
+        RevisionKey = "AwesomeFunction.zip"
+    }.Initialize(Environment);
 
-    settings.RevisionBucket = "company-deployments";
-    settings.RevisionKey = "AwesomeFunction.zip";
+    var version = await UpdateFunctionCode("MyFunction", settings);
+});
 
-    await UpdateFunctionCode("MyFunction", settings);
+Task("Publish-Version")
+    .Description("Publishes a version of your function")
+    .Does(async () =>
+{
+    var settings = new PublishVersionSettings()
+    {
+        RevisionBucket = "company-deployments",
+        RevisionKey = "AwesomeFunction.zip",
+        Description = "v1.0"
+    }.Initialize(Environment);
+
+    var version = await PublishLambdaVersion("MyFunction", settings);
+});
+
+Task("Create-Alias")
+    .Description("Update an alias that points to the specified Lambda function version.")
+    .Does(async () =>
+{
+    var version = "12345";
+    var settings = new PublishVersionSettings()
+    {
+        Name = "Production",
+        Version = version,
+        Description = "v1.0"
+    }.Initialize(Environment);
+
+    await CreateLambdaAlias("MyFunction", settings);
+});
+
+Task("Update-Alias")
+    .Description("Update an alias that points to the specified Lambda function version.")
+    .Does(async () =>
+{
+    var version = "12345";
+    var settings = new UpdateVersionSettings()
+    {
+        Name = "Production",
+        Version = version,
+        Description = "v1.0"
+    }.Initialize(Environment);
+
+    await UpdateLambdaAlias("MyFunction", settings);
 });
 
 RunTarget("Update-Function-Code");

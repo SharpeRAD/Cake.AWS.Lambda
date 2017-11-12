@@ -18,6 +18,7 @@ namespace Cake.AWS.Lambda
         /// </summary>
         /// <param name="context">The cake context.</param>
         /// <returns>A new <see cref="UpdateFunctionCodeSettings"/> instance to be used in calls to the <see cref="ILambdaManager"/>.</returns>
+        [Obsolete("Please use Initalize extension method instead")]
         public static ClientSettings CreateUpdateFunctionCodeSettings(this ICakeContext context)
         {
             if (context == null)

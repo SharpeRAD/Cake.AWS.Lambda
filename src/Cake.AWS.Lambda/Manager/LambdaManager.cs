@@ -65,7 +65,7 @@ namespace Cake.AWS.Lambda
 
 
         #region Methods
-        private AmazonLambdaClient CreateClient(UpdateFunctionCodeSettings settings)
+        private AmazonLambdaClient CreateClient(ClientSettings settings)
         {
             if (settings == null)
             {
@@ -104,7 +104,7 @@ namespace Cake.AWS.Lambda
         /// <param name="functionName">The name of an AWS Lambda function.</param>
         /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<bool> UpdateFunctionCode(string functionName, UpdateFunctionCodeSettings settings, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<string> UpdateFunctionCode(string functionName, UpdateFunctionCodeSettings settings, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (String.IsNullOrEmpty(functionName))
             {
@@ -143,11 +143,146 @@ namespace Cake.AWS.Lambda
             if (response.HttpStatusCode == HttpStatusCode.OK)
             {
                 _Log.Verbose("Successfully updated function '{0}'", functionName);
+                return response.Version;
+            }
+            else
+            {
+                _Log.Error("Failed to update function '{0}'", functionName);
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// Publishes a version of your function from the current snapshot of $LATEST.
+        /// </summary>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="PublishVersionSettings"/> used during the request to AWS.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        public async Task<string> PublishVersion(string functionName, PublishVersionSettings settings, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (String.IsNullOrEmpty(functionName))
+            {
+                throw new ArgumentNullException(nameof(functionName));
+            }
+
+
+
+            // Create Request
+            AmazonLambdaClient client = this.CreateClient(settings);
+
+            PublishVersionRequest request = new PublishVersionRequest()
+            {
+                FunctionName = functionName,
+
+                CodeSha256 = settings.CodeSha256,
+                Description = settings.Description
+            };
+
+
+
+            // Check Response
+            PublishVersionResponse response = await client.PublishVersionAsync(request, cancellationToken);
+
+            if (response.HttpStatusCode == HttpStatusCode.OK)
+            {
+                _Log.Verbose("Successfully published function '{0}'", functionName);
+                return response.Version;
+            }
+            else
+            {
+                _Log.Error("Failed to published function '{0}'", functionName);
+                return "";
+            }
+        }
+
+
+
+        /// <summary>
+        /// Creates an alias that points to the specified Lambda function version.
+        /// </summary>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="AliasSettings"/> used during the request to AWS.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        public async Task<bool> CreateAlias(string functionName, AliasSettings settings, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (String.IsNullOrEmpty(functionName))
+            {
+                throw new ArgumentNullException(nameof(functionName));
+            }
+
+
+
+            // Create Request
+            AmazonLambdaClient client = this.CreateClient(settings);
+
+            CreateAliasRequest request = new CreateAliasRequest()
+            {
+                Name = settings.Name,
+
+                FunctionName = functionName,
+                FunctionVersion = settings.Version,
+
+                Description = settings.Description
+            };
+
+
+
+            // Check Response
+            CreateAliasResponse response = await client.CreateAliasAsync(request, cancellationToken);
+
+            if (response.HttpStatusCode == HttpStatusCode.OK)
+            {
+                _Log.Verbose("Successfully published function '{0}'", functionName);
                 return true;
             }
             else
             {
-                _Log.Error("Failed to pdated function '{0}'", functionName);
+                _Log.Error("Failed to published function '{0}'", functionName);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Update the function version to which the alias points and the alias description.
+        /// </summary>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="AliasSettings"/> used during the request to AWS.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        public async Task<bool> UpdateAlias(string functionName, AliasSettings settings, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (String.IsNullOrEmpty(functionName))
+            {
+                throw new ArgumentNullException(nameof(functionName));
+            }
+
+
+
+            // Create Request
+            AmazonLambdaClient client = this.CreateClient(settings);
+
+            UpdateAliasRequest request = new UpdateAliasRequest()
+            {
+                Name = settings.Name,
+
+                FunctionName = functionName,
+                FunctionVersion = settings.Version,
+
+                Description = settings.Description
+            };
+
+
+
+            // Check Response
+            UpdateAliasResponse response = await client.UpdateAliasAsync(request, cancellationToken);
+
+            if (response.HttpStatusCode == HttpStatusCode.OK)
+            {
+                _Log.Verbose("Successfully published function '{0}'", functionName);
+                return true;
+            }
+            else
+            {
+                _Log.Error("Failed to published function '{0}'", functionName);
                 return false;
             }
         }

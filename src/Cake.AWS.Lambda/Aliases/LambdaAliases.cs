@@ -33,23 +33,50 @@ namespace Cake.AWS.Lambda
         /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
         [CakeMethodAlias]
         [CakeAliasCategory("Lambda")]
-        public static async Task<bool> UpdateLambdaFunctionCode(this ICakeContext context, string functionName, UpdateFunctionCodeSettings settings)
+        public static async Task<string> UpdateLambdaFunctionCode(this ICakeContext context, string functionName, UpdateFunctionCodeSettings settings)
         {
             return await context.CreateManager().UpdateFunctionCode(functionName, settings);
         }
 
         /// <summary>
-        /// Updates the AWS Lambda functions code.
+        /// Publishes a version of your function from the current snapshot of $LATEST.
         /// </summary>
         /// <param name="context">The cake context.</param>
         /// <param name="functionName">The name of an AWS Lambda function.</param>
-        /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        [CakeMethodAlias]
-        [CakeAliasCategory("EC2")]
-        public static async Task<bool> UpdateLambdaFunctionCode(this ICakeContext context, string functionName, UpdateFunctionCodeSettings settings, CancellationToken cancellationToken)
+        /// <param name="settings">The <see cref="PublishVersionSettings"/> used during the request to AWS.</param>
+        /// [CakeMethodAlias]
+        [CakeAliasCategory("Lambda")]
+        public static async Task<string> PublishLambdaVersion(this ICakeContext context, string functionName, PublishVersionSettings settings)
         {
-            return await context.CreateManager().UpdateFunctionCode(functionName, settings, cancellationToken);
+            return await context.CreateManager().PublishVersion(functionName, settings);
+        }
+
+
+
+        /// <summary>
+        /// Creates an alias that points to the specified Lambda function version.
+        /// </summary>
+        /// <param name="context">The cake context.</param>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="AliasSettings"/> used during the request to AWS.</param>
+        [CakeMethodAlias]
+        [CakeAliasCategory("Lambda")]
+        public static async Task<bool> CreateLambdaAlias(this ICakeContext context, string functionName, AliasSettings settings)
+        {
+            return await context.CreateManager().CreateAlias(functionName, settings);
+        }
+
+        /// <summary>
+        /// Update an alias that points to the specified Lambda function version.
+        /// </summary>
+        /// <param name="context">The cake context.</param>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="AliasSettings"/> used during the request to AWS.</param>
+        [CakeMethodAlias]
+        [CakeAliasCategory("Lambda")]
+        public static async Task<bool> UpdateLambdaAlias(this ICakeContext context, string functionName, AliasSettings settings)
+        {
+            return await context.CreateManager().UpdateAlias(functionName, settings);
         }
     }
 }
