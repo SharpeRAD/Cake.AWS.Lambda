@@ -23,5 +23,7 @@
 
         <PackageReference Include="AWSSDK.Core" Version="3.3.17.9" />
         <PackageReference Include="AWSSDK.Lambda" Version="3.3.8" />
+
+        <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     </ItemGroup>
 </Project>

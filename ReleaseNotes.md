@@ -1,3 +1,7 @@
+### New in 0.0.4 (Released 2018/01/20)
+* [Feature] CreateFunction alias
+* [Improvement] Add SessionToken to settings
+
 ### New in 0.0.3 (Released 2017/11/12)
 * [Feature] Publish Version
 * [Feature] Create / Update alias

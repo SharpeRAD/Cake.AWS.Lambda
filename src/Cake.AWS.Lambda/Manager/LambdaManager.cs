@@ -88,7 +88,14 @@ namespace Cake.AWS.Lambda
                     throw new ArgumentNullException(nameof(settings.SecretKey));
                 }
 
-                return new AmazonLambdaClient(settings.AccessKey, settings.SecretKey, settings.Region);
+                if (!String.IsNullOrEmpty(settings.SessionToken))
+                {
+                    return new AmazonLambdaClient(settings.AccessKey, settings.SecretKey, settings.SessionToken, settings.Region);
+                }
+                else
+                {
+                    return new AmazonLambdaClient(settings.AccessKey, settings.SecretKey, settings.Region);
+                }
             }
             else
             {
@@ -97,6 +104,93 @@ namespace Cake.AWS.Lambda
         }
 
 
+
+        /// <summary>
+        /// Updates the AWS Lambda functions code.
+        /// </summary>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        public async Task<string> CreateFunction(string functionName, CreateFunctionSettings settings, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (String.IsNullOrEmpty(functionName))
+            {
+                throw new ArgumentNullException(nameof(functionName));
+            }
+
+
+
+            // Create Request
+            AmazonLambdaClient client = this.CreateClient(settings);
+
+            CreateFunctionRequest request = new CreateFunctionRequest()
+            {
+                FunctionName = functionName,
+                Handler = settings.Handler,
+
+                Runtime = Runtime.FindValue(settings.Runtime),
+                Role = settings.Role,
+                Environment = new Amazon.Lambda.Model.Environment()
+                {
+                     Variables = settings.Environment
+                },
+
+                Timeout = settings.Timeout,
+                MemorySize = settings.MemorySize,
+                Publish = settings.Publish,
+                KMSKeyArn = settings.KMSKeyArn,
+
+                Tags = settings.Tags,
+                Description = settings.Description,
+
+                Code = new FunctionCode()
+                {
+                    S3Bucket = settings.S3Bucket,
+                    S3Key = settings.S3Key,
+                    S3ObjectVersion = settings.S3Version,
+                }
+            };
+
+
+
+            if (!String.IsNullOrEmpty(settings.DeadLetterConfig))
+            {
+                request.DeadLetterConfig.TargetArn = settings.DeadLetterConfig;
+            }
+
+            if (settings.ZipPath != null)
+            {
+                request.Code.ZipFile = this.GetFileStream(settings.ZipPath, settings);
+            }
+
+
+
+            if (settings.VpcSecurityGroupIds.Count > 0)
+            {
+                request.VpcConfig.SecurityGroupIds = settings.VpcSecurityGroupIds;
+            }
+
+            if (settings.VpcSubnetIds.Count > 0)
+            {
+                request.VpcConfig.SubnetIds = settings.VpcSubnetIds;
+            }
+
+
+
+            // Check Response
+            CreateFunctionResponse response = await client.CreateFunctionAsync(request, cancellationToken);
+
+            if (response.HttpStatusCode == HttpStatusCode.OK)
+            {
+                _Log.Verbose("Successfully updated function '{0}'", functionName);
+                return response.Version;
+            }
+            else
+            {
+                _Log.Error("Failed to update function '{0}'", functionName);
+                return "";
+            }
+        }
 
         /// <summary>
         /// Updates the AWS Lambda functions code.

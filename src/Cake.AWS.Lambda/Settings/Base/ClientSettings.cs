@@ -37,6 +37,11 @@ namespace Cake.AWS.Lambda
         /// </summary>
         public string SecretKey { get; set; }
 
+        /// <summary>
+        /// The AWS Session Token, if using temporary credentials.
+        /// </summary>
+        public string SessionToken { get; set; }
+
         internal AWSCredentials Credentials { get; set; }
 
 

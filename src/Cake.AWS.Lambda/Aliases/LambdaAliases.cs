@@ -33,6 +33,21 @@ namespace Cake.AWS.Lambda
         /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
         [CakeMethodAlias]
         [CakeAliasCategory("Lambda")]
+        public static async Task<string> CreateLambdaFunction(this ICakeContext context, string functionName, CreateFunctionSettings settings)
+        {
+            return await context.CreateManager().CreateFunction(functionName, settings);
+        }
+
+
+
+        /// <summary>
+        /// Updates the AWS Lambda functions code.
+        /// </summary>
+        /// <param name="context">The cake context.</param>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
+        [CakeMethodAlias]
+        [CakeAliasCategory("Lambda")]
         public static async Task<string> UpdateLambdaFunctionCode(this ICakeContext context, string functionName, UpdateFunctionCodeSettings settings)
         {
             return await context.CreateManager().UpdateFunctionCode(functionName, settings);

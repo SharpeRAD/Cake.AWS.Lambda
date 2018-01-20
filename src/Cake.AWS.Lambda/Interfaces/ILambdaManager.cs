@@ -19,6 +19,16 @@ namespace Cake.AWS.Lambda
         /// <param name="functionName">The name of an AWS Lambda function.</param>
         /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        Task<string> CreateFunction(string functionName, CreateFunctionSettings settings, CancellationToken cancellationToken = default(CancellationToken));
+
+
+
+        /// <summary>
+        /// Updates the AWS Lambda functions code.
+        /// </summary>
+        /// <param name="functionName">The name of an AWS Lambda function.</param>
+        /// <param name="settings">The <see cref="UpdateFunctionCodeSettings"/> used during the request to AWS.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         Task<string> UpdateFunctionCode(string functionName, UpdateFunctionCodeSettings settings, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
