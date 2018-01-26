@@ -1,3 +1,6 @@
+### New in 0.0.5 (Released 2018/01/26)
+* [Bug] Missing SessionToken extension
+
 ### New in 0.0.4 (Released 2018/01/20)
 * [Feature] CreateFunction alias
 * [Improvement] Add SessionToken to settings
