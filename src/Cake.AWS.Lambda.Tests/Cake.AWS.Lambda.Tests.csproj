@@ -32,4 +32,8 @@
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
         <PackageReference Include="XunitXml.TestLogger" Version="1.0.3-pre-rtm" />
     </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="netstandard" />
+  </ItemGroup>
 </Project>
