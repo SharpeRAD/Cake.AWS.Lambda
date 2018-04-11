@@ -1,3 +1,6 @@
+### New in 0.0.6 (Released 2018/01/26)
+* [Feature] Targeting Cake 0.26
+
 ### New in 0.0.5 (Released 2018/01/26)
 * [Bug] Missing SessionToken extension
 
