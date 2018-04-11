@@ -17,7 +17,7 @@
         <tags>Cake Script Build Amazon Lambda</tags>
 
         <dependencies>
-            <dependency id="Cake.Core" version="0.22.0" />
+            <dependency id="Cake.Core" version="0.26.0" />
             <dependency id="AWSSDK.Core" version="3.3.17.9" />
             <dependency id="AWSSDK.Lambda" version="3.3.8" />
         </dependencies>
