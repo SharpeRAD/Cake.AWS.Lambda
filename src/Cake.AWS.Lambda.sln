@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{7B702943-4526-4B9D-B8DD-F50821850150}"
 EndProject
@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{409BC6DA
 		..\.gitignore = ..\.gitignore
 		..\appveyor.yml = ..\appveyor.yml
 		..\build.cake = ..\build.cake
+		..\cake.config = ..\cake.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{04DD68ED-2973-4B5E-964B-9FA607BB218D}"
@@ -32,11 +33,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.AWS.Lambda", "Cake.AWS.Lambda\Cake.AWS.Lambda.csproj", "{AE0E3244-E7E1-4739-994B-5D472A8B4D5A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.AWS.Lambda.Tests", "Cake.AWS.Lambda.Tests\Cake.AWS.Lambda.Tests.csproj", "{09FDCD74-CDFB-4DF3-80CE-47533BC99BE8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5985E33B-E2CB-460C-B50E-1A33FE92F979}"
-	ProjectSection(SolutionItems) = preProject
-		..\cake.config = ..\cake.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
