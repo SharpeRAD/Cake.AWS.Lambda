@@ -34,6 +34,7 @@ Cake Build addin for Amazon Lambda
 ## Referencing
 
 [![NuGet Version](http://img.shields.io/nuget/v/Cake.AWS.Lambda.svg?style=flat)](https://www.nuget.org/packages/Cake.AWS.Lambda/)
+[![NuGet Downloads](http://img.shields.io/nuget/dt/Cake.AWS.Lambda.svg?style=flat)](https://www.nuget.org/packages/Cake.AWS.Lambda/)
 
 Cake.AWS.Lambda is available as a nuget package from the package manager console:
 
