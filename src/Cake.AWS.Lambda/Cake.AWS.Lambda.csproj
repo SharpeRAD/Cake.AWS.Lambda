@@ -19,10 +19,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="0.29.0" PrivateAssets="All" />
+        <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
 
-        <PackageReference Include="AWSSDK.Core" Version="3.3.17.9" />
-        <PackageReference Include="AWSSDK.Lambda" Version="3.3.8" />
+        <PackageReference Include="AWSSDK.Core" Version="3.3.101.2" />
+        <PackageReference Include="AWSSDK.Lambda" Version="3.3.101.1" />
 
         <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     </ItemGroup>

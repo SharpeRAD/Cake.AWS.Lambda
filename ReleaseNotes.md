@@ -1,3 +1,6 @@
+### New in 0.0.8 (Released 2019/04/28)
+* [Improvement] Update to Cake.Core v0.33
+
 ### New in 0.0.7 (Released 2018/08/12)
 * [Improvement] Update to Cake.Core v0.29
 * [Improvement] Update build scripts
