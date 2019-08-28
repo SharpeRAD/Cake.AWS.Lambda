@@ -22,7 +22,7 @@ namespace Cake.AWS.Lambda
         /// <param name="environment">The cake environment.</param>
         /// <param name="settings">The Labda settings.</param>
         /// <returns>The same <see cref="ClientSettings"/> instance so that multiple calls can be chained.</returns>
-        private static T Initialize<T>(this T settings, ICakeEnvironment environment) where T : ClientSettings
+        public static T Initialize<T>(this T settings, ICakeEnvironment environment) where T : ClientSettings
         {
             if (environment == null)
             {

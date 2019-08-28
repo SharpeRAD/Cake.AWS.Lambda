@@ -26,7 +26,7 @@ namespace Cake.AWS.Lambda
                 throw new ArgumentNullException(nameof(context));
             }
 
-            return context.Environment.CreateUpdateFunctionCodeSettings();
+            return new UpdateFunctionCodeSettings().Initialize(context.Environment);
         }
     }
 }

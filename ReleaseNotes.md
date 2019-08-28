@@ -1,3 +1,6 @@
+### New in 0.0.9 (Released 2019/08/28)
+* [Bug] Private Initialize method
+
 ### New in 0.0.8 (Released 2019/04/28)
 * [Improvement] Update to Cake.Core v0.33
 
